@@ -4,11 +4,10 @@ var memberInfo = require('../data/member.json');
 
 /* GET home page. */
 router.post('/login', function(req, res, next) {
-    console.log(memberInfo);
+    //console.log(memberInfo);
     var username = req.body.username;
     var password = req.body.password;
-    console.log(username);
-    let loginPass = false;
+    //console.log(username);
     for(let i = 0; i < memberInfo.length; i++){
             if(username == memberInfo[i].username && password == memberInfo[i].password){
                res.json({
@@ -20,7 +19,6 @@ router.post('/login', function(req, res, next) {
     //var loginData = memberInfo.filter(function (element) {
      //return memberInfo.username == username
      //});
-
 });
 
 
