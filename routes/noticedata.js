@@ -9,7 +9,6 @@ router.get('/listview', function(req, res, next) {
 
 router.get('/listfind/:index', function(req, res, next) {
     const index = parseInt(req.params.index, 10);
-    console.log(index);
     res.send(noticeData[index]);
 });
 
