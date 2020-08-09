@@ -1,28 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var memberInfo = require('../data/member.json');
 var mysql_dbc = require('../config/database')();
 var connection = mysql_dbc.init();
+var sha256 = require('sha256');
 
-mysql_dbc.test_open(connection);
 
 
 /* GET home page. */
 router.post('/login', function(req, res, next) {
     //console.log(memberInfo);
     var username = req.body.username;
-    var password = req.body.password;
+    var password = sha256(req.body.password);
     //console.log(username);
     var sql = 'SELECT * FROM user WHERE id = ?';
 
+    //console.log(PASSWORD(password));
     connection.query(sql, username, function (error, rows, fields) {
         if (error) {
             console.log('query error : ' + error);
 
         } else {
-            // console.log('The solution is: ', results);
+
             if (rows.length > 0) {
-                if (rows[0].pw == password) {
+
+                if ( rows[0].pw == password) {
                     res.json({
                         username: username,
                         success: "login sucessfull",
@@ -68,7 +69,7 @@ router.post('/login', function(req, res, next) {
 router.post('/signup', function(req, res, next) {
     //console.log(memberInfo);
     var username = req.body.username;
-    var password = req.body.password;
+    var password = sha256(req.body.password);
     var email = req.body.email;
     //console.log(username);
     var sql = 'INSERT INTO user (id, pw, email) VALUES(?, ?, ?)';
@@ -83,7 +84,6 @@ router.post('/signup', function(req, res, next) {
         else{
             res.json({
                 pass : true,
-
             });
         }
 
@@ -112,7 +112,7 @@ router.post('/findid', function(req, res, next) {
     var email = []
     email.push(req.body.email)
     var sql = "SELECT * FROM user WHERE email = ?";
-    console.log(email)
+
     connection.query(sql, email, function (error, rows, fields) {
         if (error) {
             console.log(sql)
@@ -120,7 +120,7 @@ router.post('/findid', function(req, res, next) {
         } else {
             if (rows.length > 0) {
                 res.send(rows[0].id);
-                console.log(rows);
+
             }
         }
 

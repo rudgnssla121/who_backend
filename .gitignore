@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+/dist
+data/
+node_modules/convert-hex/
+node_modules/convert-string/
+node_modules/sha256/
+public/css/app.7803e767.css
+public/css/chunk-vendors.bfe713ea.css
+public/js/app.0ffae1e2.js
+public/js/app.0ffae1e2.js.map
