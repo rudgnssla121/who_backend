@@ -115,7 +115,7 @@ router.post('/findid', function(req, res, next) {
 
     connection.query(sql, email, function (error, rows, fields) {
         if (error) {
-            console.log(sql)
+
             console.log('query error : ' + error);
         } else {
             if (rows.length > 0) {

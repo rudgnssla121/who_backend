@@ -5,7 +5,7 @@ var connection = mysql_dbc.init();
 
 /* GET home page. */
 router.get('/listview', function(req, res, next) {
-    var sql = 'SELECT DATE_FORMAT(time,\'%y-%m-%d\') AS date, username, name, content  FROM notice_board';
+    var sql = 'SELECT DATE_FORMAT(time,\'%y-%m-%d\') AS date, DATE_FORMAT(time,\'%h:%i\') AS time, username, name, content  FROM notice_board';
 
     //console.log(PASSWORD(password));
 
@@ -22,14 +22,14 @@ router.get('/listview', function(req, res, next) {
 router.get('/listfind/:index', function(req, res, next) {
     const index = parseInt(req.params.index, 10);
     var sql = 'SELECT DATE_FORMAT(time,\'%y-%m-%d\') AS date, DATE_FORMAT(time,\'%h:%i:%s\') AS time, username, name, content  FROM notice_board';
-
-
+    //console.log(index);
     //console.log(PASSWORD(password));
 
     connection.query(sql, function (error, rows, fields) {
         if (error) {
             console.log('query error : ' + error);
         } else {
+            //console.log(rows);
             res.send(rows[index]);
         }
     });
